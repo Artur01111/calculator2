@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private double secondNumber = 0.0;
     private boolean isNewOperation = true;
     private boolean hasOperator = false;
+    private boolean isError = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,32 +70,42 @@ public class MainActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setOperator("+");
+                if (!isError) {
+                    setOperator("+");
+                }
             }
         });
         buttonSubtract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setOperator("-");
+                if (!isError) {
+                    setOperator("-");
+                }
             }
         });
         buttonMultiply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setOperator("*");
+                if (!isError) {
+                    setOperator("*");
+                }
             }
         });
         buttonDivide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setOperator("/");
+                if (!isError) {
+                    setOperator("/");
+                }
             }
         });
 
         buttonEquals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calculate();
+                if (!isError) {
+                    calculate();
+                }
             }
         });
 
@@ -107,6 +118,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void appendNumber(String number) {
+        if (isError) {
+            clear();
+        }
         if (isNewOperation) {
             input = "";
             isNewOperation = false;
@@ -116,6 +130,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void appendDot() {
+        if (isError) {
+            clear();
+        }
         if (!input.contains(".")) {
             if (isNewOperation) {
                 input = "0";
@@ -163,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
                     result = firstNumber / secondNumber;
                 } else {
                     textView.setText("Error");
+                    isError = true;
                     return;
                 }
                 break;
@@ -189,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
         secondNumber = 0.0;
         isNewOperation = true;
         hasOperator = false;
+        isError = false;
         textView.setText("0");
     }
 }
