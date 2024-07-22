@@ -7,5 +7,11 @@
         <item name="android:statusBarColor">@color/black</item>
     </style>
 
+    <style name="FullscreenTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">#28323B</item>
+        <item name="android:statusBarColor">#28323B</item>
+        <item name="android:navigationBarColor">#28323B</item>
+    </style>
+
     <style name="Theme.Calculator" parent="Base.Theme.Calculator" />
 </resources>
